@@ -1,0 +1,6 @@
+{
+    "name": "coopgame",
+    "version": "0.0.1",
+    "description": "a game that utilizes socket.io for socket connections",
+    "dependencies":{}
+}

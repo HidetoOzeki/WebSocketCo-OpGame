@@ -9,7 +9,7 @@
             background-color: yellow;
             color: yellow;
             margin: auto;
-            width: 800px;
+            width:800px;
             height: 600px;
         }
     </style>
@@ -18,9 +18,19 @@
 
     <div id="game">
 
-        test
+        <canvas id="canvas" width="640" height="640"></canvas>
 
     </div>
+
+    <script>
+
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        
+        context.fillStyle="white";
+        context.fillRect(0,0,canvas.width,canvas.height);
+
+    </script>
 
     
 </body>

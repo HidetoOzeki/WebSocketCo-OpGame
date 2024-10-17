@@ -18,7 +18,7 @@
 
     <div id="game">
 
-        <canvas id="canvas" width="640" height="480"></canvas>
+        <canvas style="border: 1px black;" id="canvas" width="800" height="600"></canvas>
 
     </div>
 
@@ -26,9 +26,19 @@
 
         const canvas = document.getElementById('canvas');
         const context = canvas.getContext('2d');
+
+        const title_image = new Image();
+
+        title_image.addEventListener('load',()=>{
+            context.drawImage(canvas.width/3,canvas.height/3);
+        });
+
+        title_image.src = "Sprite-0003.png";
         
         context.fillStyle="white";
         context.fillRect(0,0,canvas.width,canvas.height);
+
+        
 
     </script>
 

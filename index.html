@@ -22,23 +22,73 @@
 
     </div>
 
+    <script src="/socket.io/socket.io.js"></script>
+
     <script>
+
+        window.addEventListener('keydown',input);
+
+        const keyCode_W = 0x57;
+        const keyCode_A = 0x41;
+        const keyCode_S = 0x53;
+        const keyCode_D = 0x44;
 
         const canvas = document.getElementById('canvas');
         const context = canvas.getContext('2d');
-
-        const title_image = new Image();
-
-        title_image.addEventListener('load',()=>{
-            context.drawImage(canvas.width/3,canvas.height/3);
-        });
-
-        title_image.src = "/Sprite-0003.png";
         
         context.fillStyle="white";
         context.fillRect(0,0,canvas.width,canvas.height);
 
-        
+        var socket = io();
+
+        var xoffset = 0;
+        var yoffset = 0;
+
+        var fillcolor = 0;
+
+        var vx = 0;
+        var vy = 0;
+
+        var x = 100;
+        var y = 100;
+
+        function input(e){
+            var keycode = e.keyCode;
+            switch(keycode){
+                case keyCode_W:
+                    y--;
+                    break;
+                case keyCode_A:
+                    x--;
+                    break;
+                case keyCode_S:
+                    y++;
+                    break;
+                case keyCode_D:
+                    x++;
+                    break;
+            }
+        }
+
+        function drawrect(x,y,sx,sy){
+            x-=xoffset;
+            y-=yoffset;
+            context.fillrect(x,y,sx,sy);
+        }
+
+        drawrect(0,550,640,10);
+
+        context.lineWidth=0;
+        context.fillStyle="blue";
+        drawrect(x,y,32,32);
+
+        for(var i = -10;i < 10;i++){
+            for(var j = -10;j < 10;j++){
+                context.lineWidth=2;
+                context.strokeStyle="white";
+                drawrect(i*32,j*32,32,32);
+            }
+        }
 
     </script>
 

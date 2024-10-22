@@ -144,6 +144,7 @@ class Player {
             player_entities = entities.splice();
 
             own_player = player_entities[own_id];
+            console.log("entities updated");
         });
 
         socket.on('connection established',(id)=>{

@@ -65,6 +65,7 @@ function update(){
         player_entities[i].update();
     }
     io.emit("entity_update",player_entities);
+    console.log(player_entities.length);
 }
 
 var update_interval = 1000.0/30.0;

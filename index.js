@@ -55,6 +55,11 @@ class Player {
 const player_ids = [];
 const player_entities = [];
 
+const keyCode_W = 0x57;
+const keyCode_A = 0x41;
+const keyCode_S = 0x53;
+const keyCode_D = 0x44;
+
 function update(){
     for(var i = 0;i < player_entities.length;i++){
         player_entities[i].update();

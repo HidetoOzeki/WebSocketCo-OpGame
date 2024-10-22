@@ -145,7 +145,8 @@ class Player {
         }
 
         socket.on('entity_update',(entities)=>{
-            player_entities = entities;
+            player_entities = entities.splice();
+
             own_player = player_entities[own_id];
         });
 
@@ -173,15 +174,13 @@ class Player {
             context.fillStyle="red";
             context.strokeStyle="red";
 
-            var px = x-xoffset;
-            var py = y-yoffset;
+            if(own_player)drawplayer(own_player.x,own_player.y,own_player.dir);
 
-            drawplayer(own_player.x,own_player.y,own_player.dir);
-
+            drawplayer(0,0,0);
 
         }
 
-        var interval = 1000.0/60.0;
+        var interval = 1000.0/30.0;
 
         setInterval(update,interval);
         setInterval(draw,interval);

@@ -76,7 +76,7 @@ app.get('/',(req,res)=>{
 });
 
 io.on('connection',(socket)=>{
-    console.log("a user connected");
+    console.log("a user connected, id is "+socket.id);
 
     let new_player = new Player();
     player_entities[socket.id] = new_player;

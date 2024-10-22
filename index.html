@@ -26,6 +26,60 @@
 
     <script>
 
+class Player {
+    constructor(){
+        this.vx = 0;
+        this.vy = 0;
+
+        this.x = 0;
+        this.y = 0;
+
+        this.dir = 0;
+        this.vel = 0;
+        this.dirvel = 0;
+        this.name = "john"
+        this.id = "";
+        this.color = Math.random()*0xffffff;
+
+        this.d = 0; //dirvel
+        this.v = 0;
+    }
+
+    setname(n){
+        this.name = n;
+    }
+    setID(id){
+        this.id = id;
+    }
+
+    move(d,v){
+        this.d=d;
+        this.v=v;
+    }
+
+    update(){
+        this.dirvel+=this.d;
+        this.vel+=this.v;
+
+        this.vx += Math.sin(this.dir)*this.vel;
+        this.vy += Math.cos(this.dir)*this.vel;
+
+        this.vy*=0.95;
+        this.vx*=0.95;
+        this.dirvel*=0.90;
+
+        this.x+=this.vx;
+        this.y+=this.vy;
+        this.dir+=this.dirvel;
+
+        this.vel=0;
+    }
+}
+
+        let player_entities = [];
+        let own_id = 0;
+        let own_player = null;
+
         var socket = io();
 
         window.addEventListener('keydown',keypressed);
@@ -75,27 +129,29 @@
             context.fillRect(x,y,sx,sy);
         }
 
-        function update(){
-
-            if(keys[keyCode_W])vel+=0.5;
-            if(keys[keyCode_A])dirvel+=0.01;
-            if(keys[keyCode_S])vel-=0.5;
-            if(keys[keyCode_D])dirvel-=0.01;
-
-            vx += Math.sin(dir)*vel;
-            vy += Math.cos(dir)*vel;
-
-            vy*=0.95;
-            vx*=0.95;
-            dirvel*=0.90;
-
-            x+=vx;
-            y+=vy;
-            dir+=dirvel;
-
-            vel=0;
-
+        function drawplayer(x,y,d){
+            x-=xoffset;
+            y-=yoffset;
+            context.beginPath();
+            context.lineTo(x+Math.sin(d)*30,y+Math.cos(d)*30);
+            context.lineTo(x+Math.sin(d+Math.PI/2)*10,y+Math.cos(d+Math.PI/2)*10);
+            context.lineTo(x+Math.sin(d-Math.PI/2)*10,y+Math.cos(d-Math.PI/2)*10);
+            context.closePath();
+            context.fill();
         }
+
+        function update(){
+            socket.emit('player_input',keys);
+        }
+
+        socket.on('entity_update',(entities)=>{
+            player_entities = entities;
+            own_player = player_entities[own_id];
+        });
+
+        socket.on('connection established',(socket)=>{
+            own_id = socket.id;
+        });
 
         function draw(){
             context.fillStyle="white";
@@ -120,12 +176,7 @@
             var px = x-xoffset;
             var py = y-yoffset;
 
-            context.beginPath();
-            context.lineTo(px+Math.sin(dir)*30,py+Math.cos(dir)*30);
-            context.lineTo(px+Math.sin(dir+Math.PI/2)*10,py+Math.cos(dir+Math.PI/2)*10);
-            context.lineTo(px+Math.sin(dir-Math.PI/2)*10,py+Math.cos(dir-Math.PI/2)*10);
-            context.closePath();
-            context.fill();
+            drawplayer(own_player.x,own_player.y,own_player.dir);
 
 
         }

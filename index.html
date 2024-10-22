@@ -141,9 +141,9 @@ class Player {
         }
 
         socket.on('entity_update',(entities)=>{
-            player_entities = entities.splice();
+            player_entities = entities.splice(own_id,1);
 
-            own_player = player_entities[own_id];
+            own_player = entities[own_id];
             console.log("entities updated");
         });
 
@@ -171,7 +171,9 @@ class Player {
             context.fillStyle="red";
             context.strokeStyle="red";
 
-            if(own_player)drawplayer(own_player.x,own_player.y,own_player.dir);
+            if(own_player){
+                drawplayer(own_player.x,own_player.y,own_player.dir);
+            }
 
             drawplayer(0,0,0);
 

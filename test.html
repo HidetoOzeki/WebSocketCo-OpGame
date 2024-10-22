@@ -22,11 +22,7 @@
 
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-
     <script>
-
-        var socket = io();
 
         window.addEventListener('keydown',keypressed);
         window.addEventListener('keyup',keyreleased);
@@ -131,7 +127,6 @@
         }
 
         var interval = 1000.0/60.0;
-
         setInterval(update,interval);
         setInterval(draw,interval);
 

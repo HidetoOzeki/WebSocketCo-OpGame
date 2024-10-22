@@ -38,7 +38,6 @@ class Player {
         this.vel = 0;
         this.dirvel = 0;
         this.name = "john"
-        this.id = "";
         this.color = Math.random()*0xffffff;
 
         this.d = 0; //dirvel
@@ -47,9 +46,6 @@ class Player {
 
     setname(n){
         this.name = n;
-    }
-    setID(id){
-        this.id = id;
     }
 
     move(d,v){
@@ -150,8 +146,8 @@ class Player {
             own_player = player_entities[own_id];
         });
 
-        socket.on('connection established',(socket)=>{
-            own_id = socket.id;
+        socket.on('connection established',(id)=>{
+            own_id = id;
         });
 
         function draw(){

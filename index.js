@@ -17,7 +17,6 @@ class Player {
         this.vel = 0;
         this.dirvel = 0;
         this.name = "john"
-        this.id = "";
         this.color = Math.random()*0xffffff;
 
         this.d = 0; //dirvel
@@ -26,9 +25,6 @@ class Player {
 
     setname(n){
         this.name = n;
-    }
-    setID(id){
-        this.id = id;
     }
 
     move(d,v){
@@ -66,7 +62,7 @@ function update(){
     io.emit("entity_update",player_entities);
 }
 
-var update_interval = 1000.0/60.0;
+var update_interval = 1000.0/30.0;
 setInterval(update,update_interval);
 
 app.get('/',(req,res)=>{
@@ -77,9 +73,8 @@ io.on('connection',(socket)=>{
     console.log("a user connected");
 
     let new_player = new Player();
-    new_player.setID(socket.id);
     player_entities[socket.id] = new_player;
-    io.emit('connection established',socket);
+    io.emit('connection established',socket.id);
 
     socket.join('room1');
 

@@ -39,6 +39,7 @@ class Player {
         this.dirvel = 0;
         this.name = "john"
         this.color = Math.random()*0xffffff;
+        this.id = "";
 
         this.d = 0; //dirvel
         this.v = 0;
@@ -73,7 +74,7 @@ class Player {
 }
 
         let player_entities = [];
-        let own_id = 0;
+        let own_id = "";
         let own_player = null;
 
         var socket = io();
@@ -125,6 +126,20 @@ class Player {
             context.fillRect(x,y,sx,sy);
         }
 
+        function getFromID(id,idxarr,objarr){
+            for(var i = 0;i < idxarr.length;i++){
+                if(idxarr[i].equals(id))return objarr[i];
+            }
+            return null;
+        }
+
+        function getIndexFromID(id,idxarr,objarr){
+            for(var i = 0;i < idxarr.length;i++){
+                if(idxarr[i].equals(id))return i;
+            }
+            return -1;
+        }
+
         function drawplayer(x,y,d){
             x-=xoffset;
             y-=yoffset;
@@ -140,13 +155,13 @@ class Player {
             socket.emit('player_input',keys);
         }
 
-        socket.on('entity_update',(entities)=>{
-            player_entities = entities.splice(own_id,1);
+        socket.on('entity_update',(data)=>{
+            player_entities = data.player_entities;
 
-            own_player = entities[own_id];
-            x = entities[own_id].x;
-            y = entities[own_id].y;
-            dir = entities[own_id].dir;
+            var own_index = getIndexFromID(own_id,data.player_ids,data.player_entities);
+            if(own_index!=-1){
+            own_player = data.player_entities[own_index];
+            }
             //console.log("entities updated");
         });
 

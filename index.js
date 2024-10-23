@@ -6,7 +6,7 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 
 class Player {
-    constructor(){
+    constructor(id){
         this.vx = 0;
         this.vy = 0;
 
@@ -18,6 +18,7 @@ class Player {
         this.dirvel = 0;
         this.name = "john"
         this.color = Math.random()*0xffffff;
+        this.id = id;
 
         this.d = 0; //dirvel
         this.v = 0;
@@ -55,6 +56,22 @@ class Player {
 const player_ids = [];
 const player_entities = [];
 
+function getEntityById(pid){
+    for(var i = 0;i < player_ids.length;i++){
+        if(player_ids[i].equals(pid))return player_entities[i];
+    }
+    return null;
+}
+
+function getEntityIndexById(pid){
+    for(var i = 0;i < player_ids.length;i++){
+        if(player_ids[i].equals(pid)){
+            return i;
+        }
+    }
+    return -1;
+}
+
 const keyCode_W = 0x57;
 const keyCode_A = 0x41;
 const keyCode_S = 0x53;
@@ -64,7 +81,7 @@ function update(){
     for(var i = 0;i < player_entities.length;i++){
         player_entities[i].update();
     }
-    io.emit("entity_update",player_entities);
+    io.emit("entity_update",{player_entities,player_ids});
     console.log(player_entities.length);
 }
 
@@ -77,9 +94,8 @@ app.get('/',(req,res)=>{
 
 io.on('connection',(socket)=>{
     console.log("a user connected, id is "+socket.id);
-
-    let new_player = new Player();
-    player_entities[socket.id] = new_player;
+    player_ids.push(socket.id);
+    player_entities.push(new Player(socket.id)); //配列に追加されない
     io.emit('connection established',socket.id);
 
     socket.join('room1');
@@ -91,12 +107,13 @@ io.on('connection',(socket)=>{
         if(keys[keyCode_A])dirvel+=0.01;
         if(keys[keyCode_S])vel-=0.5;
         if(keys[keyCode_D])dirvel-=0.01;
-        player_entities[socket.id].move(dirvel,vel);
+        var index  = getEntityIndexById(socket.id);
+        if(index!=-1)player_entities[index].move(dirvel,vel);
     });
 
     socket.on('disconnect',()=>{
         console.log("a user disconnected");
-        player_entities.splice(socket.id,1);
+        player_entities.splice(getEntityIndexById(socket.id),1);
     });
 });
 

@@ -160,6 +160,7 @@ class Player {
 
             var own_index = getIndexFromID(own_id,data.player_ids,data.player_entities);
             if(own_index!=-1){
+            player_entities.splice(own_index,1);
             own_player = data.player_entities[own_index];
             }
             //console.log("entities updated");
@@ -194,8 +195,6 @@ class Player {
                 drawplayer(own_player.x,own_player.y,own_player.dir);
                 console.log("own_player is not null");
             }
-
-            drawplayer(x,y,dir);
 
         }
 

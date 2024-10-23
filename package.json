@@ -2,5 +2,8 @@
     "name": "coopgame",
     "version": "0.0.1",
     "description": "a game that utilizes socket.io for socket connections",
-    "dependencies":{}
+    "dependencies": {
+        "express": "^4.21.1",
+        "socket.io": "^4.8.0"
+    }
 }

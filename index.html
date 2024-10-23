@@ -160,8 +160,8 @@ class Player {
 
             var own_index = getIndexFromID(own_id,data.player_ids,data.player_entities);
             if(own_index!=-1){
-            player_entities.splice(own_index,1);
             own_player = data.player_entities[own_index];
+            player_entities.splice(own_index,1);
             }
             //console.log("entities updated");
         });

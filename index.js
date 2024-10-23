@@ -119,7 +119,9 @@ io.on('connection',(socket)=>{
 
     socket.on('disconnect',()=>{
         console.log("a user disconnected");
-        player_entities.splice(getEntityIndexById(socket.id),1);
+        var index = getEntityIndexById(socket.id);
+        player_entities.splice(index,1);
+        player_ids.splice(index,1);
     });
 });
 

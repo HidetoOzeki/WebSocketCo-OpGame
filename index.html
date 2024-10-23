@@ -128,14 +128,14 @@ class Player {
 
         function getFromID(id,idxarr,objarr){
             for(var i = 0;i < idxarr.length;i++){
-                if(idxarr[i].equals(id))return objarr[i];
+                if(idxarr[i]===id)return objarr[i];
             }
             return null;
         }
 
         function getIndexFromID(id,idxarr,objarr){
             for(var i = 0;i < idxarr.length;i++){
-                if(idxarr[i].equals(id))return i;
+                if(idxarr[i]===id)return i;
             }
             return -1;
         }

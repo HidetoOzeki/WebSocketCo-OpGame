@@ -58,14 +58,14 @@ const player_entities = [];
 
 function getEntityById(pid){
     for(var i = 0;i < player_ids.length;i++){
-        if(player_ids[i].equals(pid))return player_entities[i];
+        if(player_ids[i]===pid)return player_entities[i];
     }
     return null;
 }
 
 function getEntityIndexById(pid){
     for(var i = 0;i < player_ids.length;i++){
-        if(player_ids[i].equals(pid)){
+        if(player_ids[i]===pid){
             return i;
         }
     }

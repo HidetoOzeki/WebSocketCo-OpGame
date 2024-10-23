@@ -191,6 +191,11 @@ class Player {
             context.fillStyle="red";
             context.strokeStyle="red";
 
+            for(var i = 0;i < player_entities.length;i++){
+                let p = player_entities[i];
+                drawplayer(p.x,p.y,p.dir);
+            }
+
             if(own_player){
                 drawplayer(own_player.x,own_player.y,own_player.dir);
                 console.log("own_player is not null");

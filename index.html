@@ -193,10 +193,15 @@ class Player {
 
             for(var i = 0;i < player_entities.length;i++){
                 let p = player_entities[i];
+
+                context.fillStyle=p.color;
+                context.strokeStyle=p.color;
                 drawplayer(p.x,p.y,p.dir);
             }
 
             if(own_player){
+                context.fillStyle=own_player.color;
+                context.strokeStyle=own_player.color;
                 drawplayer(own_player.x,own_player.y,own_player.dir);
                 console.log("own_player is not null");
             }

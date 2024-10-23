@@ -77,15 +77,21 @@ const keyCode_A = 0x41;
 const keyCode_S = 0x53;
 const keyCode_D = 0x44;
 
+function status_log(){
+    console.log("total count of connected players : "+player_entities.length);
+
+}
+
+setInterval(status_log,1000);
+
 function update(){
     for(var i = 0;i < player_entities.length;i++){
         player_entities[i].update();
     }
     io.emit("entity_update",{player_entities,player_ids});
-    console.log(player_entities.length);
 }
 
-var update_interval = 1000.0/30.0;
+var update_interval = 1000.0/60.0;
 setInterval(update,update_interval);
 
 app.get('/',(req,res)=>{
@@ -95,7 +101,7 @@ app.get('/',(req,res)=>{
 io.on('connection',(socket)=>{
     console.log("a user connected, id is "+socket.id);
     player_ids.push(socket.id);
-    player_entities.push(new Player(socket.id)); //配列に追加されない
+    player_entities.push(new Player(socket.id));
     io.emit('connection established',socket.id);
 
     socket.join('room1');

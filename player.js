@@ -1,4 +1,4 @@
-class Player {
+export default class Player {
     constructor(){
         this.vx = 0;
         this.vy = 0;
@@ -10,23 +10,26 @@ class Player {
         this.vel = 0;
         this.dirvel = 0;
         this.name = "john"
-        this.id = "";
         this.color = Math.random()*0xffffff;
+        this.id = "";
+
+        this.d = 0; //dirvel
+        this.v = 0;
     }
 
     setname(n){
         this.name = n;
     }
-    setID(id){
-        this.id = id;
-    }
 
     move(d,v){
-        this.dirvel+=d;
-        this.vel+=v;
+        this.d=d;
+        this.v=v;
     }
 
     update(){
+        this.dirvel+=this.d;
+        this.vel+=this.v;
+
         this.vx += Math.sin(this.dir)*this.vel;
         this.vy += Math.cos(this.dir)*this.vel;
 
@@ -40,5 +43,4 @@ class Player {
 
         this.vel=0;
     }
-
 }

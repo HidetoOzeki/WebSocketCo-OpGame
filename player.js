@@ -1,4 +1,4 @@
-export default class Player {
+class Player {
     constructor(){
         this.vx = 0;
         this.vy = 0;
@@ -44,3 +44,5 @@ export default class Player {
         this.vel=0;
     }
 }
+
+module.exports = Player;

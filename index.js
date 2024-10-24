@@ -5,7 +5,7 @@ const server= http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-import Player from 'player.js';
+const Player = require('./player.js');
 
 const player_ids = [];
 const player_entities = [];

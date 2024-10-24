@@ -24,9 +24,9 @@
 
     <script src="/socket.io/socket.io.js"></script>
 
-    <script type="module">
+    <script>
 
-        import Player from 'player.js';
+        const Player = require('./player.js');
 
         let player_entities = [];
         let own_id = "";

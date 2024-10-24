@@ -1,6 +1,7 @@
 {
     "name": "coopgame",
     "version": "0.0.1",
+    "type": "commonjs",
     "description": "a game that utilizes socket.io for socket connections",
     "dependencies": {
         "express": "^4.21.1",

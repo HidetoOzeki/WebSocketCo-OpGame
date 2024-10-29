@@ -101,7 +101,7 @@
             return -1;
         }
 
-        function drawplayer(x,y,d){
+        function drawplayer(x,y,d,col){
             x-=xoffset;
             y-=yoffset;
             context.beginPath();
@@ -109,6 +109,7 @@
             context.lineTo(x+Math.sin(d+Math.PI/2)*10,y+Math.cos(d+Math.PI/2)*10);
             context.lineTo(x+Math.sin(d-Math.PI/2)*10,y+Math.cos(d-Math.PI/2)*10);
             context.closePath();
+            context.fillStyle=col;
             context.fill();
         }
 
@@ -157,14 +158,14 @@
                 let p = player_entities[i];
                 context.fillStyle=p.color;
                 context.strokeStyle=p.color;
-                drawplayer(p.x,p.y,p.dir);
+                drawplayer(p.x,p.y,p.dir,p.color);
             }
 
             if(own_player){
                 console.log(dtoh(own_player.color));
                 context.fillStyle=own_player.color;
                 context.strokeStyle=own_player.color;
-                drawplayer(own_player.x,own_player.y,own_player.dir);
+                drawplayer(own_player.x,own_player.y,own_player.dir,own_player.color);
                 console.log("own_player is not null");
             }
 

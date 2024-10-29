@@ -9,7 +9,7 @@ class Player {
         this.dir = 0;
         this.vel = 0;
         this.dirvel = 0;
-        this.name = "john"
+        this.name = "john";
         this.color = (Math.random()*0xffffff)<<8 | 0x000000ff;
         this.id = "";
 

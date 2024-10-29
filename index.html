@@ -116,13 +116,14 @@
             if(own_index!=-1){
             own_player = data.player_entities[own_index];
             player_entities.splice(own_index,1);
+            own_id = own_player.id;
             }
             //console.log("entities updated");
         });
 
         socket.on('connection established',(id)=>{
             console.log("this is my id : "+id);
-            own_id = id;
+            //own_id = id;
         });
 
         function draw(){

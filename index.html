@@ -27,6 +27,13 @@
 
     <script type="text/javascript">
 
+        function dtoh(num){
+            if(num < 0){
+                num = 0xffffffff + num + 1;
+            }
+            return num.toString(16);
+        }
+
         let player_entities = [];
         let own_id = "";
         let own_player = null;
@@ -154,7 +161,7 @@
             }
 
             if(own_player){
-                console.log(own_player.color);
+                console.log(dtoh(own_player.color));
                 context.fillStyle=own_player.color;
                 context.strokeStyle=own_player.color;
                 drawplayer(own_player.x,own_player.y,own_player.dir);

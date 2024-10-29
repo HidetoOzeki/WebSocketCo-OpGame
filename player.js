@@ -10,7 +10,7 @@ class Player {
         this.vel = 0;
         this.dirvel = 0;
         this.name = "john"
-        this.color = Math.random()*0xffffff;
+        this.color = (Math.random()*0xffffff);
         this.id = "";
 
         this.d = 0; //dirvel

@@ -145,6 +145,11 @@
             context.fillStyle="red";
             context.strokeStyle="red";
 
+            if(own_player){
+                xoffset = own_player.x-canvas.width/2;
+                yoffset = own_player.y-canvas.height/2;
+            }
+
             for(var i = 0;i < player_entities.length;i++){
                 let p = player_entities[i];
 

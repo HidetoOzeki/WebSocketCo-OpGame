@@ -115,7 +115,6 @@
             var own_index = getIndexFromID(own_id,data.player_ids,data.player_entities);
             if(own_index!=-1){
             own_player = data.player_entities[own_index];
-            own_id = own_player.id;
             player_entities.splice(own_index,1);
             }
             //console.log("entities updated");
@@ -123,7 +122,7 @@
 
         socket.on('connection established',(id)=>{
             console.log("this is my id : "+id);
-            //own_id = id;
+            own_id = id;
         });
 
         function draw(){

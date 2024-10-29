@@ -56,7 +56,8 @@ io.on('connection',(socket)=>{
     console.log("a user connected, id is "+socket.id);
     player_ids.push(socket.id);
     player_entities.push(new Player(socket.id));
-    io.emit('connection established',socket.id);
+
+    io.to(socket.id).emit('connection established',socket.id);
 
     socket.join('room1');
 
